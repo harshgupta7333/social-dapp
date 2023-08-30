@@ -1,4 +1,4 @@
-# Dappcord
+# stackord
 
 ## Technology Stack & Tools
 

@@ -7,22 +7,22 @@ const tokens = (n) => {
 async function main() {
   // Setup accounts & variables
   const [deployer] = await ethers.getSigners()
-  const NAME = "Dappcord"
+  const NAME = "Stackord"
   const SYMBOL = "DC"
 
   // Deploy contract
-  const Dappcord = await ethers.getContractFactory("Dappcord")
-  const dappcord = await Dappcord.deploy(NAME, SYMBOL)
-  await dappcord.deployed()
+  const Stackord = await ethers.getContractFactory("Stackord")
+  const stackord = await Stackord.deploy(NAME, SYMBOL)
+  await stackord.deployed()
 
-  console.log(`Deployed Dappcord Contract at: ${dappcord.address}\n`)
+  console.log(`Deployed stackord Contract at: ${stackord.address}\n`)
 
   // Create 3 Channels
   const CHANNEL_NAMES = ["general", "intro", "jobs"]
   const COSTS = [tokens(1), tokens(0), tokens(0.25)]
 
   for (var i = 0; i < 3; i++) {
-    const transaction = await dappcord.connect(deployer).createChannel(CHANNEL_NAMES[i], COSTS[i])
+    const transaction = await stackord.connect(deployer).createChannel(CHANNEL_NAMES[i], COSTS[i])
     await transaction.wait()
 
     console.log(`Created text channel #${CHANNEL_NAMES[i]}`)

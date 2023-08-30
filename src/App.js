@@ -9,7 +9,7 @@ import Channels from './components/Channels'
 import Messages from './components/Messages'
 
 // ABIs
-import Dappcord from './abis/Dappcord.json'
+import Stackord from './abis/Stackord.json'
 
 // Config
 import config from './config.json';
@@ -21,7 +21,7 @@ function App() {
   const [provider, setProvider] = useState(null)
   const [account, setAccount] = useState(null)
 
-  const [dappcord, setDappcord] = useState(null)
+  const [stackord, setStackord] = useState(null)
   const [channels, setChannels] = useState([])
 
   const [currentChannel, setCurrentChannel] = useState(null)
@@ -32,14 +32,14 @@ function App() {
     setProvider(provider)
 
     const network = await provider.getNetwork()
-    const dappcord = new ethers.Contract(config[network.chainId].Dappcord.address, Dappcord, provider)
-    setDappcord(dappcord)
+    const stackord = new ethers.Contract(config[network.chainId].Stackord.address, Stackord, provider)
+    setStackord(stackord)
 
-    const totalChannels = await dappcord.totalChannels()
+    const totalChannels = await stackord.totalChannels()
     const channels = []
 
     for (var i = 1; i <= totalChannels; i++) {
-      const channel = await dappcord.getChannel(i)
+      const channel = await stackord.getChannel(i)
       channels.push(channel)
     }
 
@@ -84,7 +84,7 @@ function App() {
         <Channels
           provider={provider}
           account={account}
-          dappcord={dappcord}
+          stackord={stackord}
           channels={channels}
           currentChannel={currentChannel}
           setCurrentChannel={setCurrentChannel}
